@@ -1,5 +1,3 @@
-// /v0/beststories
-// https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
 var SETTINGS = {
     URL: {
         BASE: 'https://hacker-news.firebaseio.com/v0',
@@ -51,3 +49,4 @@ var Adapters;
     Adapters.HackerNews = HackerNews;
 })(Adapters || (Adapters = {}));
 angular.module("NGApp").service("hackerNewsService", Adapters.HackerNews);
+//# sourceMappingURL=hackerNews.service.js.map

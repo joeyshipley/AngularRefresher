@@ -14,3 +14,4 @@ var Views;
     Views.SearchController = SearchController;
 })(Views || (Views = {}));
 angular.module("NGApp").controller("searchController", Views.SearchController);
+//# sourceMappingURL=search.controller.js.map

@@ -1,10 +1,4 @@
-﻿// /v0/beststories
-// https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
-
-declare var angular: any;
-declare var Promise: any;
-
-const SETTINGS: any = {
+﻿const SETTINGS: any = {
     URL: {
         BASE: 'https://hacker-news.firebaseio.com/v0',
         ROUTES: {

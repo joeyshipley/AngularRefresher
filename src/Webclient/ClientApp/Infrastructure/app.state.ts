@@ -1,6 +1,4 @@
-﻿declare var angular: any;
-
-module App {
+﻿module App {
     export class State {
         static $inject = [ "$rootScope" ];
         constructor(
@@ -8,11 +6,7 @@ module App {
         ) {}
 
         public isLoading: boolean = false;
-
-        public stories: any = [
-            { id: 12345, title: 'hello 1' },
-            { id: 67890, title: 'hello 2' }
-        ];
+        public stories: any = [];
 
         public subscribeStateChange(scope, $scope) {
             var handler = this.$rootScope.$on('app-state-changed', () => {

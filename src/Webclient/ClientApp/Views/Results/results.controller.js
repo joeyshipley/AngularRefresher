@@ -7,6 +7,8 @@ var Views;
             this.retrieveBestStories = retrieveBestStories;
             appState.subscribeStateChange(this, this.$scope);
             this.$scope.title = "Results View";
+            this.$scope.isLoading = true;
+            this.$scope.stories = [];
             this.render();
             this.retrieveBestStories.perform();
         }
@@ -24,3 +26,4 @@ var Views;
     Views.ResultsController = ResultsController;
 })(Views || (Views = {}));
 angular.module("NGApp").controller("resultsController", Views.ResultsController);
+//# sourceMappingURL=results.controller.js.map

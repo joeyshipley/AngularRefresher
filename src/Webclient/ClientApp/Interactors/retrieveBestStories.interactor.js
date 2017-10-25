@@ -19,3 +19,4 @@ var Interactors;
     Interactors.RetrieveBestStories = RetrieveBestStories;
 })(Interactors || (Interactors = {}));
 angular.module("NGApp").service("retrieveBestStories", Interactors.RetrieveBestStories);
+//# sourceMappingURL=retrieveBestStories.interactor.js.map

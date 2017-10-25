@@ -4,10 +4,7 @@ var App;
         function State($rootScope) {
             this.$rootScope = $rootScope;
             this.isLoading = false;
-            this.stories = [
-                { id: 12345, title: 'hello 1' },
-                { id: 67890, title: 'hello 2' }
-            ];
+            this.stories = [];
         }
         State.prototype.subscribeStateChange = function (scope, $scope) {
             var handler = this.$rootScope.$on('app-state-changed', function () {
@@ -36,3 +33,4 @@ var App;
     App.State = State;
 })(App || (App = {}));
 angular.module("NGApp").service("appState", App.State);
+//# sourceMappingURL=app.state.js.map

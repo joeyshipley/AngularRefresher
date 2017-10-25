@@ -151,6 +151,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\PhantomJS.2.1.1\tools\phantomjs\phantomjs.exe">
+      <Link>phantomjs.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Content\main.css">
       <DependentUpon>main.scss</DependentUpon>
     </Content>
@@ -158,19 +162,24 @@
       <DependentUpon>main.css</DependentUpon>
     </Content>
     <Content Include="Assets\Scripts\angular.min.js" />
+    <Content Include="Assets\Scripts\angular.mocks.js" />
     <Content Include="Assets\Scripts\angular.route.min.js" />
     <Content Include="Assets\Scripts\angular.sanitize.min.js" />
     <Content Include="Assets\Scripts\angular.ui-router.min.js" />
+    <Content Include="Assets\Scripts\babel-polyfill.min.js" />
     <Content Include="Assets\Scripts\moment.min.js" />
-    <Content Include="Assets\Scripts\temp.js" />
     <Content Include="ClientApp\Views\Results\results.template.html" />
     <Content Include="ClientApp\Views\Search\search.template.html" />
+    <Content Include="ClientApp\_Tests\results.tests.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Scripts\modernizr-2.6.2.js" />
+    <Content Include="phantomjs-license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

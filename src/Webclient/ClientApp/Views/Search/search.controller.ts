@@ -1,6 +1,4 @@
-﻿declare var angular: any;
-
-module Views {
+﻿module Views {
     export class SearchController {
         static $inject = [ "$scope" ];
         constructor(

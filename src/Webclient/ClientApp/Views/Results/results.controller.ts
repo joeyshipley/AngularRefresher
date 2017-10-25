@@ -1,7 +1,4 @@
-﻿declare var angular: any;
-declare var Promise: any;
-
-module Views {
+﻿module Views {
     export class ResultsController {
         static $inject = [ "$scope", "appState", "retrieveBestStories" ];
         constructor(
@@ -12,6 +9,8 @@ module Views {
             appState.subscribeStateChange(this, this.$scope);
 
             this.$scope.title = "Results View";
+            this.$scope.isLoading = true;
+            this.$scope.stories = [];
 
             this.render();
             this.retrieveBestStories.perform();

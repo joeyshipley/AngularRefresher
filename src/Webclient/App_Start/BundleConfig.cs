@@ -16,6 +16,7 @@ namespace NGA.Webclient
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/vendor").Include(
+                "~/Assets/Scripts/babel-polyfill.min.js",
                 "~/Assets/Scripts/angular.min.js",
                 "~/Assets/Scripts/angular.route.min.js",
                 "~/Assets/Scripts/angular.sanitize.min.js",

@@ -1,6 +1,4 @@
-﻿declare var angular: any;
-
-var app = angular.module('NGApp');
+﻿var app = angular.module('NGApp');
 
 app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         function config($stateProvider, $urlRouterProvider, $locationProvider) {
