@@ -15,9 +15,21 @@ namespace NGA.Webclient
                 "~/Assets/Scripts/modernizr-*"
             ));
 
-            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-                "~/Assets/Scripts/temp.js"
+            bundles.Add(new ScriptBundle("~/bundles/vendor").Include(
+                "~/Assets/Scripts/angular.min.js",
+                "~/Assets/Scripts/angular.route.min.js",
+                "~/Assets/Scripts/angular.sanitize.min.js",
+                "~/Assets/Scripts/angular.ui-router.min.js",
+                "~/Assets/Scripts/moment.min.js"
             ));
+
+            bundles.Add(new ScriptBundle("~/bundles/app")
+                .Include(
+                    "~/ClientApp/Infrastructure/app.module.js",
+                    "~/ClientApp/Infrastructure/app.config.js"
+                )
+                .IncludeDirectory("~/ClientApp/Views", "*.js", true)
+            );
         }
     }
 }
