@@ -11,7 +11,6 @@ var Interactors;
                 _this.appState.setDataIsLoading();
                 _this.hackerNewsService.retrieveBestStories()
                     .then(function (results) {
-                    console.log('FINISHED > RetrieveBestStories.peform');
                     _this.appState.persistStories(results);
                     resolve();
                 });

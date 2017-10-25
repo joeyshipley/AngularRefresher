@@ -16,7 +16,7 @@ var Adapters;
         }
         HackerNews.prototype.retrieveBestStories = function () {
             var _this = this;
-            return new Promise(function (resolve, reject) {
+            return new Promise(function (resolve) {
                 var url = SETTINGS.URL.BASE + SETTINGS.URL.ROUTES.BEST_STORIES;
                 _this.$http
                     .get(url)
@@ -28,19 +28,17 @@ var Adapters;
                     return _this.$q.all(promises);
                 })
                     .then(function (results) {
-                    console.log('FINISHED > HackerNews.retrieveBestStories');
                     resolve(results);
                 });
             });
         };
         HackerNews.prototype.retrieveStoryDetails = function (id) {
             var _this = this;
-            return new Promise(function (resolve, reject) {
+            return new Promise(function (resolve) {
                 var url = (SETTINGS.URL.BASE + SETTINGS.URL.ROUTES.STORY).replace("{:id}", id);
                 _this.$http
                     .get(url)
                     .then(function (response) {
-                    console.log('FINISHED > HackerNews.retrieveStoryDetails');
                     resolve(response.data);
                 });
             });

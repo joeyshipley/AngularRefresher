@@ -17,19 +17,12 @@ var Views;
         ResultsController.prototype.init = function () {
             return this.retrieveBestStories.perform();
         };
-        ResultsController.prototype.test = function () {
-            var _this = this;
-            return new Promise(function (resolve) {
-                _this.$scope.isLoading = false;
-                resolve();
-            });
-        };
         ResultsController.prototype.render = function () {
             var _this = this;
             return new Promise(function (resolve, reject) {
                 _this.$scope.isLoading = _this.appState.isLoading;
                 _this.$scope.stories = _this.appState.stories;
-                resolve({});
+                resolve();
             });
         };
         ResultsController.$inject = ["$scope", "appState", "retrieveBestStories"];

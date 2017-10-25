@@ -17,7 +17,7 @@ module Adapters {
         ) {}
 
         public retrieveBestStories() {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 const url = SETTINGS.URL.BASE + SETTINGS.URL.ROUTES.BEST_STORIES;
                 this.$http
                     .get(url)
@@ -29,19 +29,17 @@ module Adapters {
                         return this.$q.all(promises);
                     })
                     .then((results) => {
-                        console.log('FINISHED > HackerNews.retrieveBestStories');
                         resolve(results);
                     });
             });
         }
 
         public retrieveStoryDetails(id) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 const url = (SETTINGS.URL.BASE + SETTINGS.URL.ROUTES.STORY).replace("{:id}", id);
                 this.$http
                     .get(url)
                     .then((response) => {
-                        console.log('FINISHED > HackerNews.retrieveStoryDetails');
                         resolve(response.data);
                     });
             });

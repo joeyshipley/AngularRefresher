@@ -21,18 +21,11 @@
             return this.retrieveBestStories.perform();
         }
 
-        public test() {
-            return new Promise((resolve) => {
-                this.$scope.isLoading = false;
-                resolve();
-            });
-        }
-
         public render() {
             return new Promise((resolve, reject) => {
                 this.$scope.isLoading = this.appState.isLoading;
                 this.$scope.stories = this.appState.stories;
-                resolve({});
+                resolve();
             });
         }
     }

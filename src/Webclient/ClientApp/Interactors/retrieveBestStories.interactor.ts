@@ -14,7 +14,6 @@ module Interactors {
                 this.appState.setDataIsLoading();
                 this.hackerNewsService.retrieveBestStories()
                     .then((results) => {
-                        console.log('FINISHED > RetrieveBestStories.peform');
                         this.appState.persistStories(results);
                         resolve();
                     });
