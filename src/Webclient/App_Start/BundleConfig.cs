@@ -26,8 +26,11 @@ namespace NGA.Webclient
             bundles.Add(new ScriptBundle("~/bundles/app")
                 .Include(
                     "~/ClientApp/Infrastructure/app.module.js",
-                    "~/ClientApp/Infrastructure/app.config.js"
+                    "~/ClientApp/Infrastructure/app.config.js",
+                    "~/ClientApp/Infrastructure/app.state.js"
                 )
+                .IncludeDirectory("~/ClientApp/External", "*.js", true)
+                .IncludeDirectory("~/ClientApp/Interactors", "*.js", true)
                 .IncludeDirectory("~/ClientApp/Views", "*.js", true)
             );
         }

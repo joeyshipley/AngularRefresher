@@ -191,6 +191,9 @@
     <Content Include="compilerconfig.json" />
     <Content Include="Assets\Content\main.scss" />
     <Content Include="Assets\Content\reset.scss" />
+    <TypeScriptCompile Include="ClientApp\External\hackerNews.service.ts" />
+    <TypeScriptCompile Include="ClientApp\Infrastructure\app.state.ts" />
+    <TypeScriptCompile Include="ClientApp\Interactors\retrieveBestStories.interactor.ts" />
     <TypeScriptCompile Include="ClientApp\Views\Results\results.controller.ts" />
     <None Include="packages.config" />
     <TypeScriptCompile Include="ClientApp\Views\Search\search.controller.ts" />

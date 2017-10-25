@@ -1,1 +1,11 @@
 ﻿<h1>Results: {{ title }}</h1>
+
+<div ng-show="isLoading">
+    <h3>Data Loading, Please Wait.</h3>
+</div>
+
+<div ng-repeat="story in stories" ng-show="!isLoading">
+    <div class="story-entry">
+        <div class="title">{{ story.title }}</div>
+    </div>
+</div>

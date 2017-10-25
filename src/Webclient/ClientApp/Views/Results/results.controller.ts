@@ -1,16 +1,28 @@
 ﻿declare var angular: any;
+declare var Promise: any;
 
 module Views {
     export class ResultsController {
-        static $inject = [ "$scope" ];
+        static $inject = [ "$scope", "appState", "retrieveBestStories" ];
         constructor(
             public $scope: any, 
+            public appState: App.State,
+            public retrieveBestStories: Interactors.RetrieveBestStories
         ) {
+            appState.subscribeStateChange(this, this.$scope);
+
+            this.$scope.title = "Results View";
+
             this.render();
+            this.retrieveBestStories.perform();
         }
 
         public render() {
-            this.$scope.title = "Results View";
+            return new Promise((resolve, reject) => {
+                this.$scope.isLoading = this.appState.isLoading;
+                this.$scope.stories = this.appState.stories;
+                resolve();
+            });
         }
     }
 }

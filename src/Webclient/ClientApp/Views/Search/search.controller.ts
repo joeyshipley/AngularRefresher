@@ -4,7 +4,7 @@ module Views {
     export class SearchController {
         static $inject = [ "$scope" ];
         constructor(
-            public $scope: any, 
+            public $scope: any
         ) {
             this.render();
         }
