@@ -1,0 +1,14 @@
+﻿@import 'reset.scss';
+
+.default-display
+{
+    position: relative;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+HTML, BODY
+{
+    @extend .default-display;
+}

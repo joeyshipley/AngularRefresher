@@ -1,0 +1,13 @@
+[
+    {
+        "outputFile": "Assets/Content/main.css",
+        "inputFile": "Assets/Content/main.scss",
+        "minify": {
+            "enabled": true
+        },
+        "includeInProject": true,
+        "options": {
+            "sourceMap": false
+        }
+    }
+]
