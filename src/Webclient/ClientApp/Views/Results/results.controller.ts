@@ -12,15 +12,27 @@
             this.$scope.isLoading = true;
             this.$scope.stories = [];
 
-            this.render();
-            this.retrieveBestStories.perform();
+            this.init().then(() => {
+                 return this.render();
+            });
+        }
+
+        public init(): any {
+            return this.retrieveBestStories.perform();
+        }
+
+        public test() {
+            return new Promise((resolve) => {
+                this.$scope.isLoading = false;
+                resolve();
+            });
         }
 
         public render() {
             return new Promise((resolve, reject) => {
                 this.$scope.isLoading = this.appState.isLoading;
                 this.$scope.stories = this.appState.stories;
-                resolve();
+                resolve({});
             });
         }
     }

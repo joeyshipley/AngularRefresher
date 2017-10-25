@@ -29,6 +29,7 @@ module Adapters {
                         return this.$q.all(promises);
                     })
                     .then((results) => {
+                        console.log('FINISHED > HackerNews.retrieveBestStories');
                         resolve(results);
                     });
             });
@@ -40,6 +41,7 @@ module Adapters {
                 this.$http
                     .get(url)
                     .then((response) => {
+                        console.log('FINISHED > HackerNews.retrieveStoryDetails');
                         resolve(response.data);
                     });
             });

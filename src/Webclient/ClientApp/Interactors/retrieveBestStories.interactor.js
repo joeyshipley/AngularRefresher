@@ -7,10 +7,14 @@ var Interactors;
         }
         RetrieveBestStories.prototype.perform = function () {
             var _this = this;
-            this.appState.setDataIsLoading();
-            this.hackerNewsService.retrieveBestStories()
-                .then(function (results) {
-                _this.appState.persistStories(results);
+            return new Promise(function (resolve, reject) {
+                _this.appState.setDataIsLoading();
+                _this.hackerNewsService.retrieveBestStories()
+                    .then(function (results) {
+                    console.log('FINISHED > RetrieveBestStories.peform');
+                    _this.appState.persistStories(results);
+                    resolve();
+                });
             });
         };
         RetrieveBestStories.$inject = ["appState", "hackerNewsService"];

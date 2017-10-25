@@ -2,6 +2,7 @@ var Views;
 (function (Views) {
     var ResultsController = /** @class */ (function () {
         function ResultsController($scope, appState, retrieveBestStories) {
+            var _this = this;
             this.$scope = $scope;
             this.appState = appState;
             this.retrieveBestStories = retrieveBestStories;
@@ -9,15 +10,26 @@ var Views;
             this.$scope.title = "Results View";
             this.$scope.isLoading = true;
             this.$scope.stories = [];
-            this.render();
-            this.retrieveBestStories.perform();
+            this.init().then(function () {
+                return _this.render();
+            });
         }
+        ResultsController.prototype.init = function () {
+            return this.retrieveBestStories.perform();
+        };
+        ResultsController.prototype.test = function () {
+            var _this = this;
+            return new Promise(function (resolve) {
+                _this.$scope.isLoading = false;
+                resolve();
+            });
+        };
         ResultsController.prototype.render = function () {
             var _this = this;
             return new Promise(function (resolve, reject) {
                 _this.$scope.isLoading = _this.appState.isLoading;
                 _this.$scope.stories = _this.appState.stories;
-                resolve();
+                resolve({});
             });
         };
         ResultsController.$inject = ["$scope", "appState", "retrieveBestStories"];

@@ -28,6 +28,7 @@ var Adapters;
                     return _this.$q.all(promises);
                 })
                     .then(function (results) {
+                    console.log('FINISHED > HackerNews.retrieveBestStories');
                     resolve(results);
                 });
             });
@@ -39,6 +40,7 @@ var Adapters;
                 _this.$http
                     .get(url)
                     .then(function (response) {
+                    console.log('FINISHED > HackerNews.retrieveStoryDetails');
                     resolve(response.data);
                 });
             });
