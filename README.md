@@ -8,8 +8,7 @@ Interface with the HackerNew API: https://github.com/HackerNews/API
 
 ### GETTING STARTED
 
-This exercise was done using VS2017, ReSharper, TypeScript, & SCSS.
-
+- Setup Visual Studio to support: TypeScript, SCSS, & ReSharper.
 - Clone the repo
 - Load the solution in VS
 - Resharper > Run All Tests
