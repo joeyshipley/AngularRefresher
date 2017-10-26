@@ -51,7 +51,6 @@ namespace NGA.Application.External
             _sessionStore.AddStory(story);
             return story;
         }
-
         
         private Story getStoryThrotted(int id)
         {
