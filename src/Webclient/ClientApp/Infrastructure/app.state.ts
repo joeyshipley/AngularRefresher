@@ -7,6 +7,7 @@
 
         public isLoading: boolean = false;
         public stories: any = [];
+        public selectedStory: any = null;
 
         public subscribeStateChange(scope, $scope) {
             var handler = this.$rootScope.$on('app-state-changed', () => {
@@ -42,6 +43,17 @@
         public storyExists(id) {
             const story = this.stories.find((s) => { return s.id == id; });
             return story != null;
+        }
+
+        public selectStory(id) {
+            const story = this.stories.find((s) => { return s.id == id; });
+            this.selectedStory = story;
+            this.notifyStateChange();
+        }
+
+        public clearSelectedStory() {
+            this.selectedStory = null;
+            this.notifyStateChange();
         }
     }
 }

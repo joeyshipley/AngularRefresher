@@ -1,11 +1,21 @@
 ﻿<h1>Results: {{ title }}</h1>
 
-<div ng-show="isLoading">
+<div ng-show="showLoadingMessage()">
     <h3>Data Loading, Please Wait.</h3>
 </div>
 
-<div ng-repeat="story in stories" ng-show="!isLoading">
+<div ng-repeat="story in stories" ng-show="showList()">
     <div class="story-entry">
-        <div class="title">{{ story.title }}</div>
+        <div class="title" ng-click="selectStory(story.id)">{{ story.title }}</div>
     </div>
 </div>
+
+<div ng-show="showDetails()">
+    <div><button ng-click="clearSelectedStory()">Back</button></div>
+    <h3>{{ selectedStory.title }}</h3>
+    <p>By {{ selectedStory.by }}, {{ selectedStory.time | date }}</p>
+    <p ng-show="selectedStory.text">Story: {{ selectedStory.text }}</p>
+    <p ng-show="selectedStory.url"><a href="{{ selectedStory.url }}" target="_blank">Read Full Version &raquo;</a>
+    </p>
+</div>
+

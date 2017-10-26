@@ -88,6 +88,92 @@ describe('ClientApp::Results', function() {
                     $httpBackend.flush();
                 });
             });
+
+            describe('When determining the view show states', function() {
+                it('correctly determines the show loading message state', function() {
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, []);
+                    var controller = $controller('resultsController', { $scope: $scope });
+
+                    expect(controller.showLoadingMessage()).toBe(true);
+
+                    controller.init().then(() => {
+                        expect(controller.showLoadingMessage()).toBe(false);
+
+                        done();
+                    });
+                    $httpBackend.flush();
+                });
+
+                it('correctly determines the show list state', function() {
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, []);
+                    var controller = $controller('resultsController', { $scope: $scope });
+
+                    expect(controller.showList()).toBe(false);
+
+                    controller.init().then(() => {
+                        expect(controller.showList()).toBe(true);
+
+                        done();
+                    });
+                    $httpBackend.flush();
+                });
+
+                it('correctly determines the show details state', function() {
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, [ 1 ]);
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/1.json?print=pretty").respond(200, { id: 1, title: "Story 1" });
+                    var controller = $controller('resultsController', { $scope: $scope });
+
+                    expect(controller.showDetails()).toBe(false);
+                    $httpBackend.flush();
+
+                    controller.init().then(() => {
+
+                        controller.selectState(1);
+                        expect(controller.showDetails()).toBe(true);
+
+                        done();
+                    });
+                    $httpBackend.flush();
+                });
+            });
+
+            describe('When selected stories are considered', function() {
+                it('can set the selected story', function() {
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, [ 1 ]);
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/1.json?print=pretty").respond(200, { id: 1, title: "Story 1" });
+                    var controller = $controller('resultsController', { $scope: $scope });
+                    $httpBackend.flush();
+
+                    controller.init().then(() => {
+
+                        controller.selectState(1);
+                        expect($scope.selectedStory.id).toBe(1);
+
+                        done();
+                    });
+                    $httpBackend.flush();
+                });
+
+                it('clears the selected story', function() {
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, [ 1 ]);
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/1.json?print=pretty").respond(200, { id: 1, title: "Story 1" });
+                    var controller = $controller('resultsController', { $scope: $scope });
+                    $httpBackend.flush();
+
+                    controller.init().then(() => {
+
+                        controller.selectState(1);
+                        expect($scope.selectedStory.id).toBe(1);
+
+                        controller.clearSelectedStory();
+                        expect($scope.selectedStory).toBe(null);
+
+                        done();
+                    });
+                    $httpBackend.flush();
+                });
+            });
+
         });
     });  
 

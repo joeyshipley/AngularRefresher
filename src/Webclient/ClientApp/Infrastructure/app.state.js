@@ -5,6 +5,7 @@ var App;
             this.$rootScope = $rootScope;
             this.isLoading = false;
             this.stories = [];
+            this.selectedStory = null;
         }
         State.prototype.subscribeStateChange = function (scope, $scope) {
             var handler = this.$rootScope.$on('app-state-changed', function () {
@@ -38,10 +39,18 @@ var App;
             var story = this.stories.find(function (s) { return s.id == id; });
             return story != null;
         };
+        State.prototype.selectStory = function (id) {
+            var story = this.stories.find(function (s) { return s.id == id; });
+            this.selectedStory = story;
+            this.notifyStateChange();
+        };
+        State.prototype.clearSelectedStory = function () {
+            this.selectedStory = null;
+            this.notifyStateChange();
+        };
         State.$inject = ["$rootScope"];
         return State;
     }());
     App.State = State;
 })(App || (App = {}));
 angular.module("NGApp").service("appState", App.State);
-//# sourceMappingURL=app.state.js.map
