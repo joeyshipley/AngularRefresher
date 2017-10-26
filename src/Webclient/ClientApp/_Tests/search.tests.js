@@ -83,13 +83,13 @@ describe('ClientApp::Search', function() {
             });
 
             describe('When filtering the list of stories', function() {
-                it('restricts the list based on the search', function() {
+                it('restricts the list based on the title', function() {
                     var controller = $controller('searchController', { $scope: $scope });
 
                     var appState = $$injector.get('appState');
                     appState.stories = [
-                        { id: 1, title: 'First Story' },
-                        { id: 2, title: 'Second Story' } 
+                        { id: 1, title: 'First Story', by: 'OscarTheGrouch' },
+                        { id: 2, title: 'Second Story', by: 'BigBird' } 
                     ];
                     appState.notifyStateChange();
 
@@ -97,6 +97,23 @@ describe('ClientApp::Search', function() {
                     controller.filterList();
 
                     expect(appState.listFilter).toBe("first");
+                    expect(appState.visibleStories.length).toBe(1);
+                });
+
+                it('restricts the list based on the author', function() {
+                    var controller = $controller('searchController', { $scope: $scope });
+
+                    var appState = $$injector.get('appState');
+                    appState.stories = [
+                        { id: 1, title: 'First Story', by: 'OscarTheGrouch' },
+                        { id: 2, title: 'Second Story', by: 'BigBird' } 
+                    ];
+                    appState.notifyStateChange();
+
+                    controller.$scope.filterText = "oscar";
+                    controller.filterList();
+
+                    expect(appState.listFilter).toBe("oscar");
                     expect(appState.visibleStories.length).toBe(1);
                 });
 

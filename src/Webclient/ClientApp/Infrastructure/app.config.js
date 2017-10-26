@@ -19,4 +19,3 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         });
     }
 ]);
-//# sourceMappingURL=app.config.js.map

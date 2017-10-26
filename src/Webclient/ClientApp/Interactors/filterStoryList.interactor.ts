@@ -19,7 +19,7 @@ module Interactors {
 
                 var visibleStories = [];
                 this.appState.stories.forEach((s) => {
-                    if (s.title.toLowerCase().indexOf(this.appState.listFilter) >= 0) {
+                    if (this.matchByTitle(s) || this.matchByAuthor(s)) {
                         visibleStories.push(s);
                     }
                 });
@@ -28,6 +28,14 @@ module Interactors {
 
                 resolve();
             });
+        }
+
+        private matchByTitle(story) {
+            return story.title.toLowerCase().indexOf(this.appState.listFilter) >= 0;
+        }
+
+        private matchByAuthor(story) {
+            return story.by.toLowerCase().indexOf(this.appState.listFilter) >= 0;            
         }
     }
 }

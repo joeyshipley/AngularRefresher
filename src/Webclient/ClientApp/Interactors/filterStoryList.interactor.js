@@ -15,7 +15,7 @@ var Interactors;
                 }
                 var visibleStories = [];
                 _this.appState.stories.forEach(function (s) {
-                    if (s.title.toLowerCase().indexOf(_this.appState.listFilter) >= 0) {
+                    if (_this.matchByTitle(s) || _this.matchByAuthor(s)) {
                         visibleStories.push(s);
                     }
                 });
@@ -23,6 +23,12 @@ var Interactors;
                 _this.appState.notifyStateChange();
                 resolve();
             });
+        };
+        FilterStoryList.prototype.matchByTitle = function (story) {
+            return story.title.toLowerCase().indexOf(this.appState.listFilter) >= 0;
+        };
+        FilterStoryList.prototype.matchByAuthor = function (story) {
+            return story.by.toLowerCase().indexOf(this.appState.listFilter) >= 0;
         };
         FilterStoryList.$inject = ["appState"];
         return FilterStoryList;
