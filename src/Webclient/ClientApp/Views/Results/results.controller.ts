@@ -8,7 +8,6 @@
         ) {
             appState.subscribeStateChange(this, this.$scope);
 
-            this.$scope.title = "Results View";
             this.$scope.isLoading = true;
             this.$scope.stories = [];
             this.$scope.selectedStory = null;
@@ -31,7 +30,7 @@
         public render() {
             return new Promise((resolve) => {
                 this.$scope.isLoading = this.appState.isLoading;
-                this.$scope.stories = this.appState.stories;
+                this.$scope.stories = this.appState.visibleStories;
                 this.$scope.selectedStory = this.appState.selectedStory;
                 resolve();
             });

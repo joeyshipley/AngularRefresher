@@ -52,3 +52,4 @@ var Adapters;
     Adapters.HackerNews = HackerNews;
 })(Adapters || (Adapters = {}));
 angular.module("NGApp").service("hackerNewsService", Adapters.HackerNews);
+//# sourceMappingURL=hackerNews.service.js.map

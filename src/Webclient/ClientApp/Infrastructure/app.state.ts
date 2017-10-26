@@ -7,7 +7,9 @@
 
         public isLoading: boolean = false;
         public stories: any = [];
+        public visibleStories: any = [];
         public selectedStory: any = null;
+        public listFilter: string = null;
 
         public subscribeStateChange(scope, $scope) {
             var handler = this.$rootScope.$on('app-state-changed', () => {
@@ -37,6 +39,7 @@
                 }
             });
             this.stories = this.stories.concat(newStories);
+            this.visibleStories = this.stories;
             this.notifyStateChange();
         }
 
@@ -53,6 +56,12 @@
 
         public clearSelectedStory() {
             this.selectedStory = null;
+            this.notifyStateChange();
+        }
+        
+        public clearListFilter() {
+            this.listFilter = null;
+            this.visibleStories = this.stories;
             this.notifyStateChange();
         }
     }

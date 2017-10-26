@@ -7,7 +7,6 @@ var Views;
             this.appState = appState;
             this.retrieveBestStories = retrieveBestStories;
             appState.subscribeStateChange(this, this.$scope);
-            this.$scope.title = "Results View";
             this.$scope.isLoading = true;
             this.$scope.stories = [];
             this.$scope.selectedStory = null;
@@ -27,7 +26,7 @@ var Views;
             var _this = this;
             return new Promise(function (resolve) {
                 _this.$scope.isLoading = _this.appState.isLoading;
-                _this.$scope.stories = _this.appState.stories;
+                _this.$scope.stories = _this.appState.visibleStories;
                 _this.$scope.selectedStory = _this.appState.selectedStory;
                 resolve();
             });
@@ -53,3 +52,4 @@ var Views;
     Views.ResultsController = ResultsController;
 })(Views || (Views = {}));
 angular.module("NGApp").controller("resultsController", Views.ResultsController);
+//# sourceMappingURL=results.controller.js.map

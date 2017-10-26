@@ -5,7 +5,9 @@ var App;
             this.$rootScope = $rootScope;
             this.isLoading = false;
             this.stories = [];
+            this.visibleStories = [];
             this.selectedStory = null;
+            this.listFilter = null;
         }
         State.prototype.subscribeStateChange = function (scope, $scope) {
             var handler = this.$rootScope.$on('app-state-changed', function () {
@@ -33,6 +35,7 @@ var App;
                 }
             });
             this.stories = this.stories.concat(newStories);
+            this.visibleStories = this.stories;
             this.notifyStateChange();
         };
         State.prototype.storyExists = function (id) {
@@ -46,6 +49,11 @@ var App;
         };
         State.prototype.clearSelectedStory = function () {
             this.selectedStory = null;
+            this.notifyStateChange();
+        };
+        State.prototype.clearListFilter = function () {
+            this.listFilter = null;
+            this.visibleStories = this.stories;
             this.notifyStateChange();
         };
         State.$inject = ["$rootScope"];

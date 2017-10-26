@@ -43,7 +43,6 @@ describe('ClientApp::Results', function() {
                     $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, []);
                     var controller = $controller('resultsController', { $scope: $scope });
 
-                    expect($scope.title).toBe("Results View");
                     expect($scope.isLoading).toBe(true);
                     expect($scope.stories.length).toBe(0);
 

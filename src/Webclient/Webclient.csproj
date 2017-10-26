@@ -167,6 +167,7 @@
     <Content Include="Assets\Scripts\moment.min.js" />
     <Content Include="ClientApp\Views\Results\results.template.html" />
     <Content Include="ClientApp\Views\Search\search.template.html" />
+    <Content Include="ClientApp\_Tests\search.tests.js" />
     <Content Include="ClientApp\_Tests\results.tests.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -196,6 +197,7 @@
     <Content Include="Assets\Content\reset.scss" />
     <TypeScriptCompile Include="ClientApp\External\hackerNews.service.ts" />
     <TypeScriptCompile Include="ClientApp\Infrastructure\app.state.ts" />
+    <TypeScriptCompile Include="ClientApp\Interactors\filterStoryList.interactor.ts" />
     <TypeScriptCompile Include="ClientApp\Interactors\retrieveBestStories.interactor.ts" />
     <TypeScriptCompile Include="ClientApp\Views\Results\results.controller.ts" />
     <None Include="packages.config" />

@@ -1,1 +1,8 @@
-﻿<h1>Search: {{ title }}</h1>
+﻿<div class="search-container" ng-show="showFilterControl()">
+    <input type="text" placeholder="Search List"
+        ng-model="filterText"
+        ng-model-options="{ getterSetter: true }"
+        ng-change="filterList()"
+    />
+    <button ng-click="clearFilter()">Show All</button>
+</div>
