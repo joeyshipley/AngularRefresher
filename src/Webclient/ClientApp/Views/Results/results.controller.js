@@ -52,3 +52,4 @@ var Views;
     Views.ResultsController = ResultsController;
 })(Views || (Views = {}));
 angular.module("NGApp").controller("resultsController", Views.ResultsController);
+//# sourceMappingURL=results.controller.js.map

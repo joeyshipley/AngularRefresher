@@ -62,3 +62,4 @@ var App;
     App.State = State;
 })(App || (App = {}));
 angular.module("NGApp").service("appState", App.State);
+//# sourceMappingURL=app.state.js.map

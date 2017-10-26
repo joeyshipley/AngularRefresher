@@ -1,4 +1,5 @@
-﻿/* http://meyerweb.com/eric/tools/css/reset/ 
+﻿@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -45,9 +46,100 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-.default-display, HTML, BODY {
+/* -------------------------------------------------- *=| Typography
+\* -------------------------------------------------- */
+/* -------------------------------------------------- *=| Structure
+\* -------------------------------------------------- */
+.default-display {
   position: relative;
-  display: flex;
+  display: block;
   margin: 0;
   padding: 0; }
+
+/* -------------------------------------------------- *=| Elements
+\* -------------------------------------------------- */
+HTML, BODY {
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, “Fira Sans”, “Droid Sans”, “Helvetica Neue”, Arial, sans-serif;
+  font-weight: 300;
+  font-size: 100%;
+  line-height: 1.5em;
+  color: #313131; }
+
+BODY {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em; }
+
+H1 {
+  font-size: 2.5em;
+  line-height: 1em; }
+
+H2 {
+  font-size: 2em;
+  line-height: 1em; }
+
+H3 {
+  font-size: 1.75em;
+  line-height: 1em; }
+
+H4 {
+  font-size: 1.25em;
+  line-height: 1em; }
+
+/* -------------------------------------------------- *=| Site/Page Section
+\* -------------------------------------------------- */
+.header {
+  padding: 0 1em 1em;
+  margin-bottom: 2em;
+  border-bottom: 0.05rem solid #E5E5E5; }
+  .header H3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 3em;
+    font-size: 1.7em; }
+
+.search-container {
+  margin: 0 0 1em; }
+
+.results-list-container .list-entry {
+  cursor: pointer;
+  margin-bottom: 1.5em; }
+  .results-list-container .list-entry H4 {
+    margin-bottom: 0.25em; }
+  .results-list-container .list-entry:hover {
+    color: #1D3557;
+    background-color: #F1FAEE; }
+
+.results-details-container H3 {
+  margin-bottom: 0.2em; }
+
+.results-details-container P {
+  margin-bottom: 0.5em; }
+
+/* -------------------------------------------------- *=| Overrides
+\* -------------------------------------------------- */
+.btn {
+  cursor: pointer; }
+
+@media (min-width: 48em) {
+  .container {
+    max-width: 46rem; } }
+
+@media screen and (min-width: 48em) {
+  .header {
+    padding-right: 0;
+    padding-left: 0; } }
+
+/* -------------------------------------------------- *=| Animations
+\* -------------------------------------------------- */
+.blink {
+  animation: blink-animation 0.5s steps(5, start) infinite;
+  -webkit-animation: blink-animation 0.5s steps(5, start) infinite; }
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden; } }
+
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden; } }
 

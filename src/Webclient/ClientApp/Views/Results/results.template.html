@@ -1,19 +1,26 @@
-﻿<div ng-show="showLoadingMessage()">
-    <h3>Data Loading, Please Wait.</h3>
+﻿<div class="message-container col-sm-12" ng-show="showLoadingMessage()">
+    <h4>Loading Stories <span class="blink">&raquo;</span></h4>
 </div>
 
-<div ng-repeat="story in stories" ng-show="showList()">
-    <div class="story-entry">
-        <div class="title" ng-click="selectStory(story.id)">{{ story.title }}</div>
+<div class="results-list-container col-sm-12" ng-show="showList()">
+    <div class="container">
+        <div class="row">
+            <div class="list-entry col-sm-6" ng-repeat="story in stories" ng-click="selectStory(story.id)">
+                <h4><i class="fa fa-book" aria-hidden="true"></i> {{ story.title }}</h4>
+                <p><i class="fa fa-user" aria-hidden="true"></i> {{ story.by }}</p>
+            </div>
+        </div>
     </div>
 </div>
 
-<div ng-show="showDetails()">
-    <div><button ng-click="clearSelectedStory()">Back</button></div>
-    <h3>{{ selectedStory.title }}</h3>
-    <p>By {{ selectedStory.by }}, {{ selectedStory.time | date }}</p>
-    <p ng-show="selectedStory.text">Story: {{ selectedStory.text }}</p>
-    <p ng-show="selectedStory.url"><a href="{{ selectedStory.url }}" target="_blank">Read Full Version &raquo;</a>
-    </p>
+<div class="results-details-container col-sm-12" ng-show="showDetails()">
+    <h3><i class="fa fa-book" aria-hidden="true"></i> {{ selectedStory.title }}</h3>
+    <p><i class="fa fa-user" aria-hidden="true"></i> {{ selectedStory.by }} <i class="fa fa-calendar" aria-hidden="true"></i> Posted On {{ selectedStory.time | date }}</p>
+    <p ng-show="selectedStory.text">{{ selectedStory.text }}</p>
+    <p ng-show="!selectedStory.text">This story did not have a description text. Please use the navigation link below to read the full version of this story.</p>
+    <div ng-show="selectedStory.url">
+        <button class="btn btn-small btn-danger" ng-click="clearSelectedStory()">Back</button> 
+        <a class="btn btn-small btn-primary" href="{{ selectedStory.url }}" target="_blank">Read Full Version &raquo;</a>
+    </div>
 </div>
 

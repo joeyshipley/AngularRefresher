@@ -1,8 +1,8 @@
-﻿<div class="search-container" ng-show="showFilterControl()">
-    <input type="text" placeholder="Search List"
+﻿<div class="search-container col-sm-12 input-group" ng-show="showFilterControl()">
+    <button class="input-group-addon" ng-click="clearFilter()">Show All</button>
+    <input class="form-control" type="text" placeholder="Search List"
         ng-model="filterText"
         ng-model-options="{ getterSetter: true }"
         ng-change="filterList()"
     />
-    <button ng-click="clearFilter()">Show All</button>
 </div>

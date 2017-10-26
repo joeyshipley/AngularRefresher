@@ -36,3 +36,4 @@ var Interactors;
     Interactors.FilterStoryList = FilterStoryList;
 })(Interactors || (Interactors = {}));
 angular.module("NGApp").service("filterStoryList", Interactors.FilterStoryList);
+//# sourceMappingURL=filterStoryList.interactor.js.map
