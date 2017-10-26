@@ -192,6 +192,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\API\StoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Infrastructure\ApiCaller.cs" />
     <Compile Include="Infrastructure\DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="Infrastructure\DependencyResolution\IoC.cs" />
     <Compile Include="Infrastructure\DependencyResolution\StructureMapDependencyScope.cs" />
@@ -201,8 +202,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Example.cs" />
     <Compile Include="Infrastructure\JsonApiResult.cs" />
+    <Compile Include="Infrastructure\SessionStore.cs" />
+    <Compile Include="Infrastructure\SettingsProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +267,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj">
+      <Project>{9CF7E9E0-31F6-4E9B-A9F5-458A3091B42E}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

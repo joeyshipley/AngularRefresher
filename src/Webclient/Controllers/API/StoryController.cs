@@ -1,4 +1,6 @@
 ﻿using System.Web.Http;
+using NGA.Application.Infrastructure;
+using NGA.Application.Stories.Interactors;
 using NGA.Webclient.Infrastructure;
 
 namespace NGA.Webclient.Controllers.API
@@ -6,24 +8,31 @@ namespace NGA.Webclient.Controllers.API
     [RoutePrefix("api/stories")]
     public class StoryController : ApiController
     {
-        private readonly IExample _example;
+        private readonly IRetrieveTopStoriesInteractor _retrieveTopStories;
+        private readonly IRetrieveStoryInteractor _retrieveStory;
+        private readonly ISessionStore _sessionStore;
 
-        public StoryController(IExample example)
+        public StoryController(
+            IRetrieveTopStoriesInteractor retrieveTopStories,
+            IRetrieveStoryInteractor retrieveStory
+        )
         {
-            _example = example;
+            _retrieveTopStories = retrieveTopStories;
+            _retrieveStory = retrieveStory;
         }
 
         [Route("")]
         public IHttpActionResult Get()
         {
-
-            return JsonApiResult.Build(new [] {  "1", "2"  });
+            var result = _retrieveTopStories.Perform();
+            return JsonApiResult.Build(result);
         }
 
         [Route("{id:int}")]
         public IHttpActionResult Get(int id)
         {
-            return JsonApiResult.Build(_example.Message());
+            var result = _retrieveStory.Perform(id);
+            return JsonApiResult.Build(result);
         }
     }
 }

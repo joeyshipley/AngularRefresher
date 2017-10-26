@@ -16,6 +16,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using NGA.Application.Infrastructure;
 using StructureMap.Configuration.DSL;
 using StructureMap.Graph;
 
@@ -25,17 +26,21 @@ namespace NGA.Webclient.Infrastructure.DependencyResolution {
 
         private static readonly List<string> _assembliesToScan = new List<string>
         {
+            "NGA.Application",
             "NGA.Webclient"
         };
 
-        public DefaultRegistry() {
-            Scan(scan => 
+        public DefaultRegistry()
+        {
+            Scan(scan =>
             {
                 scan.TheCallingAssembly();
                 scan.WithDefaultConventions();
                 _assembliesToScan.ForEach(scan.Assembly);
             });
-            // For<IExample>().Use<Example>();
+            For<ISessionStore>().Use<SessionStore>();
+            For<ISettingsProvider>().Use<SettingsProvider>();
+            For<IApiCaller>().Use<ApiCaller>();
         }
 
         #endregion
