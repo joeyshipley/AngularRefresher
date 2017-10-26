@@ -23,9 +23,20 @@ var App;
             this.notifyStateChange();
         };
         State.prototype.persistStories = function (stories) {
+            var _this = this;
             this.isLoading = false;
-            this.stories = stories;
+            var newStories = [];
+            stories.forEach(function (s) {
+                if (!_this.storyExists(s.id)) {
+                    newStories.push(s);
+                }
+            });
+            this.stories = this.stories.concat(newStories);
             this.notifyStateChange();
+        };
+        State.prototype.storyExists = function (id) {
+            var story = this.stories.find(function (s) { return s.id == id; });
+            return story != null;
         };
         State.$inject = ["$rootScope"];
         return State;

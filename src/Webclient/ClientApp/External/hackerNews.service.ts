@@ -10,10 +10,11 @@
 
 module Adapters {
     export class HackerNews {
-        static $inject = [ "$http", "$q" ];
+        static $inject = [ "$http", "$q", "appState" ];
         constructor(
             public $http: any,
-            public $q: any
+            public $q: any,
+            public appState: App.State
         ) {}
 
         public retrieveBestStories() {
@@ -24,7 +25,9 @@ module Adapters {
                     .then((response) => {
                         var promises = [];
                         response.data.forEach((id) => {
-                            promises.push(this.retrieveStoryDetails(id));
+                            if (!this.appState.storyExists(id)) {
+                                promises.push(this.retrieveStoryDetails(id));
+                            }
                         });
                         return this.$q.all(promises);
                     })

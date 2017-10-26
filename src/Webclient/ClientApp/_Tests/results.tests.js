@@ -11,8 +11,7 @@
 /// <reference path="../Views/Results/results.controller.js" />
 
 describe('ClientApp::Results', function() {
-    var $scope, $rootScope, $controller;
-    var $httpBackend;
+    var $$injector, $scope, $rootScope, $controller, $httpBackend;
 
     beforeEach(angular.mock.module('NGApp'));
 
@@ -20,6 +19,7 @@ describe('ClientApp::Results', function() {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 500;
 
         inject(function($injector) {
+            $$injector = $injector;
             $rootScope = $injector.get('$rootScope');
             $scope = $rootScope.$new();
             $controller = $injector.get('$controller');
@@ -63,6 +63,25 @@ describe('ClientApp::Results', function() {
                     controller.init().then(() => {
                         expect($scope.isLoading).toBe(false);
                         expect($scope.stories.length).toBe(2);
+
+                        done();
+                    });
+                    $httpBackend.flush();
+                });
+
+                it('does request stories already fetched from the API', function(done) {
+                    var appState = $$injector.get('appState');
+                    appState.stories = [ { id: 1, title: 'Already Loaded' } ];
+
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, [ 1, 2 ]);
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/1.json?print=pretty").respond(200, { id: 1, title: "Reloaded" });
+                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/2.json?print=pretty").respond(200, { id: 2, title: "Story 2" });
+
+                    var controller = $controller('resultsController', { $scope: $scope });
+                    $httpBackend.flush();
+
+                    controller.init().then(() => {
+                        expect($scope.stories[0].title).toBe("Already Loaded");
 
                         done();
                     });

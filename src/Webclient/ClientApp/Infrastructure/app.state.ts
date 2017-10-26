@@ -29,8 +29,19 @@
 
         public persistStories(stories: any[]) {
             this.isLoading = false;
-            this.stories = stories;
+            var newStories = [];
+            stories.forEach((s) => {
+                if (!this.storyExists(s.id)) {
+                    newStories.push(s);
+                }
+            });
+            this.stories = this.stories.concat(newStories);
             this.notifyStateChange();
+        }
+
+        public storyExists(id) {
+            const story = this.stories.find((s) => { return s.id == id; });
+            return story != null;
         }
     }
 }

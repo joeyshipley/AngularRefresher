@@ -10,9 +10,10 @@ var SETTINGS = {
 var Adapters;
 (function (Adapters) {
     var HackerNews = /** @class */ (function () {
-        function HackerNews($http, $q) {
+        function HackerNews($http, $q, appState) {
             this.$http = $http;
             this.$q = $q;
+            this.appState = appState;
         }
         HackerNews.prototype.retrieveBestStories = function () {
             var _this = this;
@@ -23,7 +24,9 @@ var Adapters;
                     .then(function (response) {
                     var promises = [];
                     response.data.forEach(function (id) {
-                        promises.push(_this.retrieveStoryDetails(id));
+                        if (!_this.appState.storyExists(id)) {
+                            promises.push(_this.retrieveStoryDetails(id));
+                        }
                     });
                     return _this.$q.all(promises);
                 })
@@ -43,7 +46,7 @@ var Adapters;
                 });
             });
         };
-        HackerNews.$inject = ["$http", "$q"];
+        HackerNews.$inject = ["$http", "$q", "appState"];
         return HackerNews;
     }());
     Adapters.HackerNews = HackerNews;
