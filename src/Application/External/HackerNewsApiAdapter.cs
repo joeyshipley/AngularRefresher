@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NGA.Application.Infrastructure;
@@ -29,10 +30,11 @@ namespace NGA.Application.External
             var stories = new List<Story>();
             var url = _settingsProvider.ApiHackerNewsTopStories();
             var storyIds = retrieveTopStoryIdsFromApi(url).Result;
-            storyIds.ForEach((id) =>
-            {
-                stories.Add(getStoryThrotted(id));
-            });
+            storyIds.Take(_settingsProvider.ApiHackerNewsMaxStoryRequests()).ToList()
+                .ForEach((id) =>
+                {
+                    stories.Add(getStoryThrotted(id));
+                });
             return stories;
         }
 

@@ -4,5 +4,6 @@
     {
         string ApiHackerNewsTopStories();
         string ApiHackerNewsStoryDetails(int id);
+        int ApiHackerNewsMaxStoryRequests();
     }
 }

@@ -138,6 +138,10 @@ namespace NGA.Tests.Application.External.HackerNewsApiAdapterTests
         {
             _adapter = SystemUnderTest;
 
+            Mocker.Get<ISettingsProvider>()
+                .ApiHackerNewsMaxStoryRequests()
+                .Returns(5);
+
             Mocker.Get<IApiCaller>()
                 .Call(Arg.Any<string>(), Arg.Any<Func<string, List<int>>>())
                 .Returns(new List<int> { 1, 2 });
@@ -219,6 +223,10 @@ namespace NGA.Tests.Application.External.HackerNewsApiAdapterTests
         public override void Arrange()
         {
             _adapter = SystemUnderTest;
+
+            Mocker.Get<ISettingsProvider>()
+                .ApiHackerNewsMaxStoryRequests()
+                .Returns(5);
 
             Mocker.Get<IApiCaller>()
                 .Call(Arg.Any<string>(), Arg.Any<Func<string, List<int>>>())

@@ -19,5 +19,12 @@ namespace NGA.Webclient.Infrastructure
             route = route.Replace("{:id}", id.ToString());
             return $"{ baseUrl }{ route }";
         }
+
+        public int ApiHackerNewsMaxStoryRequests()
+        {
+            var stringSetting = ConfigurationManager.AppSettings.Get("ApiHackerNewsMaxStoryRequests");
+            var maxStoryRequests = !string.IsNullOrEmpty(stringSetting) ? int.Parse(stringSetting) : 20;
+            return maxStoryRequests;
+        }
     }
 }
