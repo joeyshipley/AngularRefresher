@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -18,6 +19,11 @@ namespace NGA.Webclient
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            HttpContext.Current.Session.Timeout = 1440;
+        }
+
         public override void Init()
         {
             this.PostAuthenticateRequest += MvcApplication_PostAuthenticateRequest;
@@ -26,7 +32,7 @@ namespace NGA.Webclient
 
         private void MvcApplication_PostAuthenticateRequest(object sender, EventArgs e)
         {
-            System.Web.HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
+            HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
         }
     }
 }
