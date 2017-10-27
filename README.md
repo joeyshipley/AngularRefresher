@@ -13,8 +13,8 @@ Interface with the HackerNews API: https://github.com/HackerNews/API
 - View list of best HackerNews stories
 - Filter/Search the list of best HackerNews stories
 - View details of a HackerNews story
-- Serverside Caching of the stories fetched from HackerNews
-- Clientside caching of the stories fetched from BE
+- Serverside session caching of the stories fetched from HackerNews
+- Clientside in-memory caching of the stories fetched from BE
 - Azure hosted
 
 ### VIEW IN BROWSER
