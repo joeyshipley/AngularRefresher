@@ -4,7 +4,7 @@ Refresher C# .NET MVC &amp; AngularJS 1.x
 
 ### TASK
 
-Interface with the HackerNew API: https://github.com/HackerNews/API
+Interface with the HackerNews API: https://github.com/HackerNews/API
 
 ### Application Features
 - C# MVC + WebAPI Application
@@ -69,4 +69,4 @@ Interface with the HackerNew API: https://github.com/HackerNews/API
 - The first server call to HackerNews is a beast (~10 minutes), it is fetching 500 stories with thread.sleeps. Future versions could load smaller lists and have user request more, fetch chunks of the list and push them down to the client, or something of those sorts.
 - Tests around 'Get Best Stories' tests run slow due to the thread.sleep, will need to wrap those sleepers in a service so that it can be mocked easily.
 - Currently unable to run clientside tests via PhantomJS. There is an unresolved issue/bug in TypeScript/Promises/Jasmine/PhantomJS that is keeping promises from resolving in TypeScript. The app & tests run and complete in the browser.
-- Test naming conventions might be a bit odd for those who are not familiar with my testing practices. For this exercise I went with Mockist tests (I generally prefer classical style tests as they are more flexible in larger scale refactorings). For examples of both see: https://github.com/joeyshipley/TestingPractices
+- Test naming conventions might be a bit odd for those who are not familiar with my testing practices. For this exercise I went with Mockist tests (I generally prefer classical style tests as they are more flexible in larger scale refactoring). For examples of both see: https://github.com/joeyshipley/TestingPractices
