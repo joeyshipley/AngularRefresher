@@ -18,9 +18,13 @@
     <p><i class="fa fa-user" aria-hidden="true"></i> {{ selectedStory.by }} <i class="fa fa-calendar" aria-hidden="true"></i> Posted On {{ selectedStory.time | date }}</p>
     <p ng-show="selectedStory.text">{{ selectedStory.text }}</p>
     <p ng-show="!selectedStory.text">This story did not have a description text. Please use the navigation link below to read the full version of this story.</p>
-    <div ng-show="selectedStory.url">
+    <div>
         <button class="btn btn-small btn-danger" ng-click="clearSelectedStory()">Back</button> 
-        <a class="btn btn-small btn-primary" href="{{ selectedStory.url }}" target="_blank">Read Full Version &raquo;</a>
+        <a class="btn btn-small btn-primary" 
+           href="{{ selectedStory.url }}"
+           target="_blank"
+           ng-show="selectedStory.url"
+        >Read Full Version &raquo;</a>
     </div>
 </div>
 

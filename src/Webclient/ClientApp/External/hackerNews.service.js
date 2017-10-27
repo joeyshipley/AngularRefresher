@@ -1,9 +1,9 @@
 var SETTINGS = {
     URL: {
-        BASE: 'https://hacker-news.firebaseio.com/v0',
+        BASE: '/',
         ROUTES: {
-            BEST_STORIES: '/beststories.json',
-            STORY: '/item/{:id}.json?print=pretty'
+            BEST_STORIES: 'api/stories/',
+            STORY: 'api/stories/{:id}'
         }
     }
 };
@@ -22,16 +22,8 @@ var Adapters;
                 _this.$http
                     .get(url)
                     .then(function (response) {
-                    var promises = [];
-                    response.data.forEach(function (id) {
-                        if (!_this.appState.storyExists(id)) {
-                            promises.push(_this.retrieveStoryDetails(id));
-                        }
-                    });
-                    return _this.$q.all(promises);
-                })
-                    .then(function (results) {
-                    resolve(results);
+                    var stories = response.data.Stories.map(function (s) { return _this.mapStory(s); });
+                    resolve(stories);
                 });
             });
         };
@@ -42,9 +34,19 @@ var Adapters;
                 _this.$http
                     .get(url)
                     .then(function (response) {
-                    resolve(response.data);
+                    resolve(_this.mapStory(response.data.Story));
                 });
             });
+        };
+        HackerNews.prototype.mapStory = function (data) {
+            return {
+                id: data.Id,
+                by: data.By,
+                title: data.Title,
+                text: data.Text,
+                url: data.Url,
+                time: moment(data.time).format("MM/DD/YYYY")
+            };
         };
         HackerNews.$inject = ["$http", "$q", "appState"];
         return HackerNews;

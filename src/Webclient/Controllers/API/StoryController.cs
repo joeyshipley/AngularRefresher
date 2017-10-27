@@ -10,7 +10,6 @@ namespace NGA.Webclient.Controllers.API
     {
         private readonly IRetrieveTopStoriesInteractor _retrieveTopStories;
         private readonly IRetrieveStoryInteractor _retrieveStory;
-        private readonly ISessionStore _sessionStore;
 
         public StoryController(
             IRetrieveTopStoriesInteractor retrieveTopStories,

@@ -266,7 +266,7 @@ namespace NGA.Tests.Application.External.HackerNewsApiAdapterTests
         public void It_checks_to_see_if_the_story_is_in_sesssion_storage()
         {
             Mocker.Get<ISessionStore>()
-                .Received(2)
+                .Received(4)
                 .StoryExists(Arg.Any<int>());
         }
 

@@ -54,6 +54,8 @@ namespace NGA.Application.External
         
         private Story getStoryThrotted(int id)
         {
+            if (_sessionStore.StoryExists(id)) { return getStory(id); }
+            
             var story = getStory(id);
             System.Threading.Thread.Sleep(1000);
             return story;

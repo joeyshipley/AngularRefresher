@@ -3,12 +3,15 @@
 /// <reference path="../../Assets/Scripts/angular.mocks.js" />
 /// <reference path="../../Assets/Scripts/angular.ui-router.min.js" />
 /// <reference path="../../Assets/Scripts/angular.sanitize.min.js" />
+/// <reference path="../../Assets/Scripts/moment.min.js" />
 
 /// <reference path="../Infrastructure/app.module.js" />
 /// <reference path="../Infrastructure/app.state.js" />
 /// <reference path="../External/hackerNews.service.js" />
 /// <reference path="../Interactors/retrieveBestStories.interactor.js" />
 /// <reference path="../Views/Results/results.controller.js" />
+
+var base_url = '/api/stories/';
 
 describe('ClientApp::Results', function() {
     var $$injector, $scope, $rootScope, $controller, $httpBackend;
@@ -40,7 +43,7 @@ describe('ClientApp::Results', function() {
 
             describe('When loading the controller', function() {
                 it('sets the default scope values', function() {
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, []);
+                    $httpBackend.when('GET', base_url).respond(200, { Stories: [] });
                     var controller = $controller('resultsController', { $scope: $scope });
 
                     expect($scope.isLoading).toBe(true);
@@ -52,9 +55,10 @@ describe('ClientApp::Results', function() {
             
             describe('When loading the stories', function() {
                 it('gets the stories from the API', function(done) {
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, [ 1, 2 ]);
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/1.json?print=pretty").respond(200, { id: 1, title: "Story 1" });
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/2.json?print=pretty").respond(200, { id: 2, title: "Story 2" });
+                    $httpBackend.when('GET', base_url).respond(200, { Stories: [
+                        { id: 1, title: "Reloaded" },
+                        { id: 2, title: "Story 2" }
+                    ] });
 
                     var controller = $controller('resultsController', { $scope: $scope });
                     $httpBackend.flush();
@@ -72,9 +76,10 @@ describe('ClientApp::Results', function() {
                     var appState = $$injector.get('appState');
                     appState.stories = [ { id: 1, title: 'Already Loaded' } ];
 
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, [ 1, 2 ]);
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/1.json?print=pretty").respond(200, { id: 1, title: "Reloaded" });
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/2.json?print=pretty").respond(200, { id: 2, title: "Story 2" });
+                    $httpBackend.when('GET', base_url).respond(200, { Stories: [
+                        { id: 1, title: "Reloaded" },
+                        { id: 2, title: "Story 2" }
+                    ] });
 
                     var controller = $controller('resultsController', { $scope: $scope });
                     $httpBackend.flush();
@@ -89,8 +94,8 @@ describe('ClientApp::Results', function() {
             });
 
             describe('When determining the view show states', function() {
-                it('correctly determines the show loading message state', function() {
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, []);
+                it('correctly determines the show loading message state', function(done) {
+                    $httpBackend.when('GET', base_url).respond(200, { Stories: [] });
                     var controller = $controller('resultsController', { $scope: $scope });
 
                     expect(controller.showLoadingMessage()).toBe(true);
@@ -103,8 +108,9 @@ describe('ClientApp::Results', function() {
                     $httpBackend.flush();
                 });
 
-                it('correctly determines the show list state', function() {
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, []);
+                it('correctly determines the show list state', function(done) {
+                    $httpBackend.when('GET', base_url).respond(200, { Stories: [] });
+
                     var controller = $controller('resultsController', { $scope: $scope });
 
                     expect(controller.showList()).toBe(false);
@@ -117,9 +123,8 @@ describe('ClientApp::Results', function() {
                     $httpBackend.flush();
                 });
 
-                it('correctly determines the show details state', function() {
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, [ 1 ]);
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/1.json?print=pretty").respond(200, { id: 1, title: "Story 1" });
+                it('correctly determines the show details state', function(done) {
+                    $httpBackend.when('GET', base_url).respond(200, { Stories: [ { Id: 1, Title: "Story 1" } ] });
                     var controller = $controller('resultsController', { $scope: $scope });
 
                     expect(controller.showDetails()).toBe(false);
@@ -127,7 +132,7 @@ describe('ClientApp::Results', function() {
 
                     controller.init().then(() => {
 
-                        controller.selectState(1);
+                        controller.selectStory(1);
                         expect(controller.showDetails()).toBe(true);
 
                         done();
@@ -137,31 +142,27 @@ describe('ClientApp::Results', function() {
             });
 
             describe('When selected stories are considered', function() {
-                it('can set the selected story', function() {
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, [ 1 ]);
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/1.json?print=pretty").respond(200, { id: 1, title: "Story 1" });
+                it('can set the selected story', function(done) {
+                    $httpBackend.when('GET', base_url).respond(200, { Stories: [ { Id: 1, Title: "Story 1" } ] });
                     var controller = $controller('resultsController', { $scope: $scope });
                     $httpBackend.flush();
 
                     controller.init().then(() => {
-
-                        controller.selectState(1);
+                        controller.selectStory(1);
                         expect($scope.selectedStory.id).toBe(1);
-
                         done();
                     });
                     $httpBackend.flush();
                 });
 
-                it('clears the selected story', function() {
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/beststories.json").respond(200, [ 1 ]);
-                    $httpBackend.when('GET', "https://hacker-news.firebaseio.com/v0/item/1.json?print=pretty").respond(200, { id: 1, title: "Story 1" });
+                it('clears the selected story', function(done) {
+                    $httpBackend.when('GET', base_url).respond(200, { Stories: [ { Id: 1, Title: "Story 1" } ] });
                     var controller = $controller('resultsController', { $scope: $scope });
                     $httpBackend.flush();
 
                     controller.init().then(() => {
 
-                        controller.selectState(1);
+                        controller.selectStory(1);
                         expect($scope.selectedStory.id).toBe(1);
 
                         controller.clearSelectedStory();

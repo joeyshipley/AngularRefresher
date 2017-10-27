@@ -1,9 +1,9 @@
 ﻿const SETTINGS: any = {
     URL: {
-        BASE: 'https://hacker-news.firebaseio.com/v0',
+        BASE: '/',
         ROUTES: {
-            BEST_STORIES: '/beststories.json',
-            STORY: '/item/{:id}.json?print=pretty'
+            BEST_STORIES: 'api/stories/',
+            STORY: 'api/stories/{:id}'
         }
     }
 }
@@ -23,16 +23,8 @@ module Adapters {
                 this.$http
                     .get(url)
                     .then((response) => {
-                        var promises = [];
-                        response.data.forEach((id) => {
-                            if (!this.appState.storyExists(id)) {
-                                promises.push(this.retrieveStoryDetails(id));
-                            }
-                        });
-                        return this.$q.all(promises);
-                    })
-                    .then((results) => {
-                        resolve(results);
+                        const stories = response.data.Stories.map((s) => { return this.mapStory(s); });
+                        resolve(stories);
                     });
             });
         }
@@ -43,9 +35,20 @@ module Adapters {
                 this.$http
                     .get(url)
                     .then((response) => {
-                        resolve(response.data);
+                        resolve(this.mapStory(response.data.Story));
                     });
             });
+        }
+
+        private mapStory(data) {
+            return {
+                id: data.Id,
+                by: data.By,
+                title: data.Title,
+                text: data.Text,
+                url: data.Url,
+                time: moment(data.time).format("MM/DD/YYYY")
+            };
         }
     }
 }
