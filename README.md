@@ -1,6 +1,6 @@
-# NG App Refresher
+# NG App Refresher Exercise
 
-Refresher C# .NET MVC &amp; AngularJS 1.x
+Refresher Exercise in C# .NET MVC &amp; AngularJS 1.x
 
 ### TASK
 
