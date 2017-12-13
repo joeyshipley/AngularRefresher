@@ -19,6 +19,7 @@ Interface with the HackerNews API: https://github.com/HackerNews/API
 
 ### VIEW IN BROWSER
 
+``` Link no longer valid ```
 - http://ngshipleycloud.cloudapp.net/
 
 ---
